@@ -24,79 +24,15 @@ namespace BitStampListener
     {
         public static async Task Main(string[] args)
         {
-            //var image = ScreenshotMaker.CaptureDesktop();
-            //image.Save(@"C:\Users\maxim\Downloads\test.jpeg", ImageFormat.Jpeg);
-
-            //Мои
-            //string googleClientId = "869330182156-pb8ausdsl3l29kvddb65g7s93jplacs0.apps.googleusercontent.com";
-            //string googleClientSecret = "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";
-
-            //Машины
-            string googleClientId = "609451915545-qj46v51p1libsbcm8jco7eh5i0r6gc2b.apps.googleusercontent.com";
-            string googleClientSecret = "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";
+            string googleClientId = "xxx";
+            string googleClientSecret = "xxx";
             string[] scopes = new[] { Google.Apis.Sheets.v4.SheetsService.Scope.Spreadsheets };
 
             UserCredential credential = await GoogleAuth.LoginAsync(googleClientId, googleClientSecret, scopes);
             GoogleSheetsManager manager = new GoogleSheetsManager(credential);
 
-            //var newSheet = await manager.CreateNewAsync("TestApiDocument");
-            //Console.WriteLine(newSheet.ToString());
-
-            /*var mySpreadSheetId = "12l1v-WaDGicdppED7in-zdP1Vfu3WK0TkXql0zx3Qoc";
-                        var spreadSheet = manager.GetSpreadSheet(mySpreadSheetId);
-
-                        var testSingleCell = manager.GetSingleValue(spreadSheet.SpreadsheetId, "E16");
-                        Console.WriteLine(testSingleCell.Values.First().First());
-
-                        var aRange = "A1:A10";
-                        var bRange = "B1:B10";
-                        var cRange = "C1:C10";
-
-                        string[] valueRanges = new[] { aRange, bRange, cRange };
-                        var multipleResponse = manager.GetMultipleValues(mySpreadSheetId, valueRanges);
-
-                        var aResponse = multipleResponse.ValueRanges.ElementAt(0);
-                        var bResponse = multipleResponse.ValueRanges.ElementAt(1);
-                        var cResponse = multipleResponse.ValueRanges.ElementAt(2);
-
-                        Console.WriteLine("\n\nResult:");
-                        for(int i = 0; i < aResponse.Values.Count; i++)
-                        {
-                            string a, b, c;
-                            try
-                            {
-                                a = aResponse.Values[i].First().ToString();
-                            }
-                            catch
-                            {
-                                a = "null";
-                            }
-                            try
-                            {
-                                b = bResponse.Values[i].First().ToString();
-                            }
-                            catch
-                            {
-                                b = "null";
-                            }
-                            try
-                            {
-                                c = cResponse.Values[i].First().ToString();
-                            }
-                            catch
-                            {
-                                c = "null";
-                            }
-
-                            Console.WriteLine($"A{i}: {a}\tB{i}: {b}\tC{i}: {c}");
-                        }*/
-
             //Получение списка всех биткоин адресов
-            //Мои
-            //var cryptoAddressesSheetId = "1KMdf_L4UeWNOwMM54rpnhnpapzgelvttCX7R09n8FN0";
-
-            //Машины
-            var cryptoAddressesSheetId = "1QnkVxuU7L0GBrbiuQSUdZbcA8OoYdfIJFqyW9KBinbw";
+            var cryptoAddressesSheetId = "xxx";
             var spreadSheet = manager.GetSpreadSheet(cryptoAddressesSheetId);
 
             var addressesRange = "адреса btc!A2:A";
@@ -189,7 +125,7 @@ namespace BitStampListener
                     await txRep.CreateMany(newTransactions);
 
                     var slackIntegrator = new SlackIntegrator();
-                    var slackClient = new SlackClient("https://hooks.slack.com/services/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");
+                    var slackClient = new SlackClient("https://hooks.slack.com/services/xxx");
                     foreach (var item in newTransactions)
                     {
                         decimal usdPrice = 0;
@@ -205,7 +141,7 @@ namespace BitStampListener
                         Console.ResetColor();
                         slackIntegrator.SendMessage(slackClient, text);
 
-                        var txsSheetId = "16DckAwmOVVsC0MH8uniYQrRlW12bkwbHPAiiAO8KW6M";
+                        var txsSheetId = "xxx";
                         var txsRange = "BTC!A:N";
                         string[] txValueRanges = new[] { txsRange };
                         var oblist = new List<object>() { "Received", item.Date.ToString("dd"), item.Date.ToString("MMMM"), item.Date.ToString("yyyy"), item.Date.ToString("HH:mm"), "confirmed 1", item.Value, "", "", "", usdPrice.ToString(), "usdScreen", eurPrice.ToString(), "eurScreen" };
