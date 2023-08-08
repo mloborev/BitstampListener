@@ -15,7 +15,7 @@ namespace BitstampListener.Modules
             {
                 Text = text,
                 IconEmoji = Emoji.Ghost,
-                Username = "mloborev"
+                Username = "xxx"
             };
             var result = slackClient.Post(slackMessage);
         }
